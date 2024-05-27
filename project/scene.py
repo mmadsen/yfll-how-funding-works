@@ -34,12 +34,11 @@ class LibraryFunding(Scene):
         self.add(logo)
         self.wait(4)
         self.play(FadeOut(title, shift=DOWN * 2, scale=1.5))
-        self.wait(2)
         self.remove(*self.mobjects)
 
     def introduction(self):
         # Orientation
-        l1 = to_text("Our library is funded by property taxes").scale(0.5)
+        l1 = to_text("Our library is funded by property taxes.").scale(0.5)
         l2 = to_text("Each year, by law, the Library levy amount equals").scale(0.5)
         l3 = to_text("the previous year's revenue plus 1%, and a small amount").scale(0.5)
         l4 = to_text("that covers new construction.  This is independent of property values.").scale(0.5)
@@ -48,15 +47,15 @@ class LibraryFunding(Scene):
         first_group = VGroup(l1,l2,l3,l4).arrange(DOWN, aligned_edge=LEFT, buff=0.2).move_to((-6.5,2.1,0), aligned_edge=LEFT)
 
         l5 = to_text("Unfortunately, actual expenses increase by more than 1% each year.").scale(0.5)
-        l6 = to_text("Some expenses are discretionary, but most costs are not.").scale(0.5)
-        l7 = to_text("Over time, average expenses have grown by 4-6% per year.").scale(0.5)
+        l6 = to_text("Some expenses are discretionary, but most are not.").scale(0.5)
+        l7 = to_text("Expenses tend to grow by 5-7% annually.").scale(0.5)
 
         second_group = VGroup(l5,l6,l7).arrange(DOWN, aligned_edge=LEFT, buff=0.2).move_to((-6.5,-0.25,0), aligned_edge=LEFT)
 
-        l8 = to_text("This means that over time, the Library must either consume its reserve funds").scale(0.5)
+        l8 = to_text("Over time, the Library must either consume its reserves").scale(0.5)
         l9 = to_text("or cut services, staff, or hours.  When those reserves are gone, the").scale(0.5)
         l10 = to_text("Library must return to the voters to increase its property tax levy.").scale(0.5)
-        l12 = to_text("Currently, this occurs every 10-15 years, depending upon the inflation rate.").scale(0.5)
+        l12 = to_text("This last occurred in 2011.").scale(0.5)
 
         third_group = VGroup(l8,l9,l10,l12).arrange(DOWN, aligned_edge=LEFT, buff=0.2).move_to((-6.5,-2.5,0), aligned_edge=LEFT)
 
@@ -79,7 +78,7 @@ class LibraryFunding(Scene):
 
     def construct_abstract_scenario_graph(self):
         # Orientation
-        l1 = to_text("This scenario shows the balance between revenue and expenses").scale(0.5)
+        l1 = to_text("This scenario shows how the balance between revenue and expenses").scale(0.5)
         l12 = to_text("leads to a cycle where the Library comes to voters every 10-15 years.").scale(0.5)
 
         first_group = VGroup(l1,l12).arrange(DOWN, aligned_edge=LEFT, buff=0.2).move_to((-6.5,2.5,0), aligned_edge=LEFT)
@@ -93,8 +92,8 @@ class LibraryFunding(Scene):
 
 
         l5 = to_text("Watch how reserves grow for the first few years.  But then, as expenses").scale(0.5)
-        l6 = to_text("outpace revenue growth, reserves are used for operations and eventually").scale(0.5)
-        l7 = to_text("the Library needs to come back to voters to provide the same service level.").scale(0.5)
+        l6 = to_text("exceed revenue, reserves are used for operations and eventually").scale(0.5)
+        l7 = to_text("the Library needs to come back to voters in order to maintain services.").scale(0.5)
 
         second_group = VGroup(l5,l6,l7).arrange(DOWN, aligned_edge=LEFT, buff=0.2).move_to((-6.5,-2.5,0), aligned_edge=LEFT)
 
@@ -214,34 +213,37 @@ class LibraryFunding(Scene):
 
         self.remove(drain_reserves_text)
         self.add(next_levy_vgroup)
-        self.wait(15)
+        self.wait(12)
         self.remove(*self.mobjects)
 
 
     def conclusion(self):
-        logo = ImageMobject("assets/YesLibraryWeb3.png").scale(0.3).move_to((0,-3.3,0))
+        logo = ImageMobject("assets/YesLibraryWeb3.png").scale(0.3).move_to((-1.5,-3.3,0))
 
         l1 = to_text("The Library last came to voters in 2011, and that levy adjustment").scale(0.5)
         l2 = to_text("created reserves that were intended to last through 2018.").scale(0.5)
     
         first_group = VGroup(l1,l2).arrange(DOWN, aligned_edge=LEFT, buff=0.2).move_to((-6.5,2.75,0), aligned_edge=LEFT)
 
-        l5 = to_text("With careful budgeting and limited cost of living increases,").scale(0.5)
-        l6 = to_text("the reserves have lasted much longer.  But reserves are close to").scale(0.5)
-        l7 = to_text("exhausted, because of the balance between expenses and revenue. ").scale(0.5)
+        l5 = to_text("With careful budgeting the reserves have lasted much longer.").scale(0.5)
+        l7 = to_text("But reserves will be exhausted by next year.").scale(0.5)
         l4 = to_text("The Library is asking voters to approve a levy adjustment on August 6th.").scale(0.5)
 
-        second_group = VGroup(l5,l6,l7,l4).arrange(DOWN, aligned_edge=LEFT, buff=0.2).move_to((-6.5,0.5,0), aligned_edge=LEFT)
+        second_group = VGroup(l5,l7,l4).arrange(DOWN, aligned_edge=LEFT, buff=0.2).move_to((-6.5,0.5,0), aligned_edge=LEFT)
 
-        l8 = to_text("We urge you to learn more at the Library's website, and at yesforlibrarylevy.org").scale(0.5)
-        l9 = to_text("VOTE YES on August 6th", w=SEMIBOLD, color=ManimColor.from_hex("#138d8c") ).scale(0.7)
+        l8 = to_text("Learn more at the Library's website: sjlib.org/levylidlift").scale(0.5)
+        l9 = to_text("VOTE YES on August 6th", w=SEMIBOLD, color=ManimColor.from_hex("#138d8c") ).scale(0.8)
 
-        third_group = VGroup(l8,l9).arrange(DOWN, buff=0.2).move_to((0,-2,0))
+        third_group = VGroup(l8,l9).arrange(DOWN, buff=0.4).move_to((0,-1.75,0))
+
+        l10 = to_text("yesforlibrarylevy.org", color=ManimColor.from_hex("#138d8c")).scale(0.5).move_to((1.5,-3.3,0))
+
 
         self.add(first_group)
         self.add(second_group)
         self.add(third_group)
         self.add(logo)
+        self.add(l10)
         self.wait(10)
 
 
