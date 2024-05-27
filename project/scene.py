@@ -6,14 +6,8 @@ import numpy as np
 
 
 
-
 def to_text(s: str, w = NORMAL, f = "Bitstream Vera Sans", color=WHITE, slant=NORMAL):
     return Text(s, weight=w, font=f, color=color, slant=slant)
-
-
-
-
-
 
 
 
@@ -69,13 +63,13 @@ class LibraryFunding(Scene):
         l11 = to_text("Now, let's see an example of how this works over time...", w=SEMIBOLD).scale(0.6).move_to((0,0,0))
 
         self.add(first_group)
-        self.wait(10)
+        self.wait(15)
         first_group.color = GREY
         self.add(second_group)
-        self.wait(10)
+        self.wait(15)
         second_group.color = GREY
         self.add(third_group)
-        self.wait(10)
+        self.wait(15)
         self.remove(first_group, second_group, third_group)
         self.add(l11)
         self.wait(6)
@@ -107,7 +101,7 @@ class LibraryFunding(Scene):
         self.add(first_group)
         self.add(assumptions_group)
         self.add(second_group)
-        self.wait(10)
+        self.wait(15)
         self.remove(*self.mobjects)
 
 
@@ -134,8 +128,10 @@ class LibraryFunding(Scene):
         starting_reserves = 400000
         tracker = ValueTracker(starting_reserves)
 
+        bar_color = GREEN
+
         bar_chart = always_redraw(
-            lambda: BarChart(values=[tracker.get_value()], bar_names=["Reserve \$"], bar_colors=[BLUE], y_range=[0, 1600000, 200000]).move_to((5.6,1,0))
+            lambda: BarChart(values=[tracker.get_value()], bar_names=["Reserve \$"], bar_colors=[bar_color], y_range=[0, 1600000, 200000]).move_to((5.6,1,0))
         )
         bar_labels = bar_chart.get_bar_labels()
 
@@ -158,7 +154,7 @@ class LibraryFunding(Scene):
             new_rev = int(cur_rev + (cur_rev * 0.015))
             new_exp = int(cur_exp + (cur_exp * 0.05))
             new_res = cur_reserves + (new_rev - new_exp)
-
+            print(f"new res: {new_res} cur_reserves: {cur_reserves}")
 
             rev_x_vals.append(cur_year)
             rev_y_vals.append(new_rev)
@@ -187,8 +183,8 @@ class LibraryFunding(Scene):
         first_pos_flag = False 
         first_neg_flag = False 
 
-        add_reserves_text = to_text("At first, revenue is greater than expenses, adding to reserves",w=SEMIBOLD).scale(0.3).move_to((-0.75,-2.5,0))
-        drain_reserves_text = to_text("Later, reserves are used to cover expenses",w=SEMIBOLD).scale(0.3).move_to((1.25,-1.5,0))
+        add_reserves_text = to_text("At first, revenue is greater than expenses, adding to reserves",w=SEMIBOLD, color=GREEN).scale(0.3).move_to((-0.75,-2.5,0))
+        drain_reserves_text = to_text("Later, reserves are used to cover expenses",w=SEMIBOLD, color=YELLOW).scale(0.3).move_to((1.25,-1.5,0))
         next_levy_adj = to_text("When reserves are almost gone, a levy adjustment is needed", w=SEMIBOLD, color=RED).scale(0.3)
         next_levy_adj_2 = to_text("to replenish reserves, and start the cycle over again", w=SEMIBOLD, color=RED).scale(0.3)
         next_levy_vgroup = VGroup(next_levy_adj, next_levy_adj_2).arrange(DOWN, aligned_edge=LEFT, buff=0.2).move_to((1.25,-1.5,0))
@@ -210,6 +206,7 @@ class LibraryFunding(Scene):
                     first_neg_flag = True
                     self.remove(add_reserves_text)
                     self.add(drain_reserves_text)
+                    bar_color = RED
             if tracker.get_value() < 300000:
                 break
             cur_year += 1
