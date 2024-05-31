@@ -1,4 +1,13 @@
-.PHONY: video
+.PHONY: funding 
+.PHONY: budget 
+.PHONY: all 
 
-video:
-	manim -pqh scene.py LibraryFunding
+
+funding:
+	manim -pqh libraryfunding.py LibraryFunding
+
+budget:
+	manim -pqh librarybudget.py LibraryBudget 
+
+all:
+	funding budget
